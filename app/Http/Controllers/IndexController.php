@@ -2,17 +2,26 @@
 
 namespace Corp\Http\Controllers;
 
+//use Corp\Article;
+use Corp\Menu;
+//use Corp\Repositories\ArticlesRepository;
+use Corp\Repositories\MenusRepository;
+//use Corp\Repositories\PortfoliosRepository;
+//use Corp\Repositories\SlidersRepository;
+//use Config;
 use Illuminate\Http\Request;
+
+//use Corp\Http\Requests;
 
 class IndexController extends SiteController
 {
 
-    public function __construct(SlidersRepository $s_rep, PortfoliosRepository $p_rep, ArticlesRepository $a_rep)
+    public function __construct()
     {
         parent::__construct(new MenusRepository(new Menu()));
-        $this->s_rep = $s_rep;
-        $this->a_rep = $a_rep;
-        $this->p_rep = $p_rep;
+//        $this->s_rep = $s_rep;
+//        $this->a_rep = $a_rep;
+//        $this->p_rep = $p_rep;
         $this->bar = 'right';
 
         $this->template = env('THEME').'.index';
