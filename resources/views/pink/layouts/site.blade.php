@@ -124,55 +124,55 @@
         <!-- END HEADER -->
 
         <!-- START SLIDER -->
-        @yield('slider')
-        <div class="wrap_result">
+        {{--@yield('slider')--}}
+        {{--<div class="wrap_result">--}}
 
-        </div>
-    @if(Route::currentRouteName() == 'portfolios.index')
-        <!-- START PAGE META -->
-            <div id="page-meta">
-                <div class="inner group">
-                    <h3>Welcome to my portfolio page</h3>
-                    <h4>... i hope you enjoy my works</h4>
-                </div>
-            </div>
-            <!-- END PAGE META -->
-    @endif
+        {{--</div>--}}
+    {{--@if(Route::currentRouteName() == 'portfolios.index')--}}
+        {{--<!-- START PAGE META -->--}}
+            {{--<div id="page-meta">--}}
+                {{--<div class="inner group">--}}
+                    {{--<h3>Welcome to my portfolio page</h3>--}}
+                    {{--<h4>... i hope you enjoy my works</h4>--}}
+                {{--</div>--}}
+            {{--</div>--}}
+            {{--<!-- END PAGE META -->--}}
+    {{--@endif--}}
 
-    @if(Route::currentRouteName() == 'contacts')
-        <!-- START PAGE META -->
-            <div id="page-meta">
-                <div class="inner group">
-                    <h3>...Say Hello! :)</h3>
-                    <h4>Get in touch with Pink Rio team</h4>
-                </div>
-            </div>
-            <!-- END PAGE META -->
-    @endif
+    {{--@if(Route::currentRouteName() == 'contacts')--}}
+        {{--<!-- START PAGE META -->--}}
+            {{--<div id="page-meta">--}}
+                {{--<div class="inner group">--}}
+                    {{--<h3>...Say Hello! :)</h3>--}}
+                    {{--<h4>Get in touch with Pink Rio team</h4>--}}
+                {{--</div>--}}
+            {{--</div>--}}
+            {{--<!-- END PAGE META -->--}}
+    {{--@endif--}}
 
-    <!-- START PRIMARY -->
-        <div id="primary" class="sidebar-{{ isset($bar) ? $bar : 'no' }}">
-            <div class="inner group">
-                <!-- START CONTENT -->
-            @yield('content')
-            <!-- END COMMENTS -->
+    {{--<!-- START PRIMARY -->--}}
+        {{--<div id="primary" class="sidebar-{{ isset($bar) ? $bar : 'no' }}">--}}
+            {{--<div class="inner group">--}}
+                {{--<!-- START CONTENT -->--}}
+            {{--@yield('content')--}}
+            {{--<!-- END COMMENTS -->--}}
 
-                <!-- END CONTENT -->
-                <!-- START SIDEBAR -->
-            @yield('bar')
-            <!-- END SIDEBAR -->
-                <!-- START EXTRA CONTENT -->
-                <!-- END EXTRA CONTENT -->
-            </div>
-        </div>
-        <!-- END PRIMARY -->
+                {{--<!-- END CONTENT -->--}}
+                {{--<!-- START SIDEBAR -->--}}
+            {{--@yield('bar')--}}
+            {{--<!-- END SIDEBAR -->--}}
+                {{--<!-- START EXTRA CONTENT -->--}}
+                {{--<!-- END EXTRA CONTENT -->--}}
+            {{--</div>--}}
+        {{--</div>--}}
+        {{--<!-- END PRIMARY -->--}}
 
-        <!-- START COPYRIGHT -->
-    @yield('footer')
-    <!-- END COPYRIGHT -->
-    </div>
-    <!-- END WRAPPER -->
-</div>
+        {{--<!-- START COPYRIGHT -->--}}
+    {{--@yield('footer')--}}
+    {{--<!-- END COPYRIGHT -->--}}
+    {{--</div>--}}
+    {{--<!-- END WRAPPER -->--}}
+{{--</div>--}}
 <!-- END BG SHADOW -->
 
 <script type="text/javascript" src="{{ asset(env('THEME')) }}/js/jquery.custom.js"></script>

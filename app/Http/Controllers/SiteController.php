@@ -3,7 +3,7 @@
 namespace Corp\Http\Controllers;
 
 use Corp\Repositories\MenusRepository;
-
+use Menu;
 use Illuminate\Http\Request;
 
 class SiteController extends Controller
@@ -18,7 +18,7 @@ class SiteController extends Controller
 
     protected $contentRightBar = FALSE;
     protected $contentLeftBar = FALSE;
-    protected $bar = FALSE;
+    protected $bar = 'no';
 
     public function __construct(MenusRepository $m_rep) {
         $this->m_rep = $m_rep;
@@ -35,6 +35,17 @@ class SiteController extends Controller
 
     protected function getMenu() {
         $menu = $this->m_rep->get();
-        return $menu;
+        $mBuilder = Menu::make('MyNav', function ($m) use ($menu) {
+
+            foreach ($menu as $item) {
+
+                if($item->parent_id == 0) {
+                    $m->add($item->title, $item->path)->id($item->id);
+                } else {
+
+                }
+            }
+        });
+        return $mBuilder;
     }
 }
