@@ -28,24 +28,30 @@ class SiteController extends Controller
 
         $menu = $this->getMenu();
 
-        $navigation = view(env('THEME').'.navigation')->render();
+        $navigation = view(env('THEME').'.navigation')->with('menu', $menu)->render();
         $this->vars = array_add($this->vars, 'navigation', $navigation);
         return view($this->template)->with($this->vars);
     }
 
     protected function getMenu() {
         $menu = $this->m_rep->get();
+
         $mBuilder = Menu::make('MyNav', function ($m) use ($menu) {
 
             foreach ($menu as $item) {
 
-                if($item->parent_id == 0) {
+                if($item->parent == 0) {
                     $m->add($item->title, $item->path)->id($item->id);
-                } else {
+                }
+                else {
+                    if($m->find($item->parent)) {
+                        $m->find($item->parent)->add($item->title, $item->path);
+                    }
 
                 }
             }
         });
+
         return $mBuilder;
     }
 }
