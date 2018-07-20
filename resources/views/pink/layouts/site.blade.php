@@ -153,11 +153,9 @@
     {{--<!-- START PRIMARY -->--}}
         {{--<div id="primary" class="sidebar-{{ isset($bar) ? $bar : 'no' }}">--}}
             {{--<div class="inner group">--}}
-                {{--<!-- START CONTENT -->--}}
-            {{--@yield('content')--}}
-            {{--<!-- END COMMENTS -->--}}
-
-                {{--<!-- END CONTENT -->--}}
+                <!-- START CONTENT -->
+            @yield('content')
+                <!-- END CONTENT -->
                 {{--<!-- START SIDEBAR -->--}}
             {{--@yield('bar')--}}
             {{--<!-- END SIDEBAR -->--}}
