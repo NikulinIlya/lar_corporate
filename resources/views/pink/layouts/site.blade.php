@@ -124,7 +124,7 @@
         <!-- END HEADER -->
 
         <!-- START SLIDER -->
-        {{--@yield('slider')--}}
+        @yield('slider')
         {{--<div class="wrap_result">--}}
 
         {{--</div>--}}
