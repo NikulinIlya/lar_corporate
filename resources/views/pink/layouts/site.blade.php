@@ -156,9 +156,9 @@
                 <!-- START CONTENT -->
             @yield('content')
                 <!-- END CONTENT -->
-                {{--<!-- START SIDEBAR -->--}}
-            {{--@yield('bar')--}}
-            {{--<!-- END SIDEBAR -->--}}
+                <!-- START SIDEBAR -->
+            @yield('bar')
+            <!-- END SIDEBAR -->
                 {{--<!-- START EXTRA CONTENT -->--}}
                 {{--<!-- END EXTRA CONTENT -->--}}
             {{--</div>--}}
