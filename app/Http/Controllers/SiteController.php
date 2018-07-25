@@ -36,6 +36,7 @@ class SiteController extends Controller
             $this->vars = array_add($this->vars, 'rightBar', $rightBar);
         }
 
+        $this->vars = array_add($this->vars, 'bar', $this->bar);
         return view($this->template)->with($this->vars);
     }
 
