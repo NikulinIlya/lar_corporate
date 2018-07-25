@@ -165,12 +165,12 @@
         </div>
         <!-- END PRIMARY -->
 
-        {{--<!-- START COPYRIGHT -->--}}
-    {{--@yield('footer')--}}
-    {{--<!-- END COPYRIGHT -->--}}
-    {{--</div>--}}
-    {{--<!-- END WRAPPER -->--}}
-{{--</div>--}}
+        <!-- START COPYRIGHT -->
+    @yield('footer')
+    <!-- END COPYRIGHT -->
+    </div>
+    <!-- END WRAPPER -->
+</div>
 <!-- END BG SHADOW -->
 
 <script type="text/javascript" src="{{ asset(env('THEME')) }}/js/jquery.custom.js"></script>
