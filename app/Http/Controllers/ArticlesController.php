@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Corp\Repositories\ArticlesRepository;
 use Corp\Repositories\PortfoliosRepository;
 use Corp\Repositories\CommentsRepository;
+use Corp\Category;
 
 class ArticlesController extends SiteController
 {
@@ -23,10 +24,10 @@ class ArticlesController extends SiteController
         $this->template = env('THEME').'.articles';
     }
 
-    public function index()
+    public function index($cat_alias = FALSE)
     {
 
-        $articles = $this->getArticles();
+        $articles = $this->getArticles($cat_alias);
         $content = view(env('THEME').'.articles_content')->with('articles', $articles)->render();
         $this->vars = array_add($this->vars, 'content', $content);
 
@@ -53,12 +54,40 @@ class ArticlesController extends SiteController
 
     public function getArticles($alias = FALSE) {
 
-        $articles = $this->a_rep->get(['id','title','alias','created_at','img','desc', 'user_id', 'category_id'], FALSE, TRUE);
+        $where = FALSE;
+
+        if($alias) {
+            //WHERE 'alias'=$alias
+            $id = Category::select('id')->where('alias', $alias)->first()->id;
+            //where 'category_id'=$id
+            $where = ['category_id', $id];
+        }
+
+        $articles = $this->a_rep->get(['id','title','alias','created_at','img','desc', 'user_id', 'category_id'], FALSE, TRUE, $where);
 
         if($articles) {
             $articles->load('user', 'category', 'comments');
         }
 
         return $articles;
+    }
+
+    public function show($alias = FALSE)
+    {
+        $article = $this->a_rep->one($alias, ['comments' => TRUE]);
+
+        if($article) {
+            $article->img = json_decode($article->img);
+        }
+
+        $content = view(env('THEME').'.article_content')->with('article', $article)->render();
+        $this->vars = array_add($this->vars, 'content', $content);
+
+        $comments = $this->getComments(config('settings.recent_comments'));
+        $portfolios = $this->getPortfolios(config('settings.recent_portfolios'));
+
+        $this->contentRightBar = view(env('THEME').'.articlesBar')->with(['comments' => $comments, 'portfolios' => $portfolios]);
+
+        return $this->renderOutput();
     }
 }
