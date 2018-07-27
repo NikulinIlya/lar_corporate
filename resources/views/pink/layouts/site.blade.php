@@ -125,9 +125,7 @@
 
         <!-- START SLIDER -->
         @yield('slider')
-        {{--<div class="wrap_result">--}}
-
-        {{--</div>--}}
+        <div class="wrap_result"></div>
     {{--@if(Route::currentRouteName() == 'portfolios.index')--}}
         {{--<!-- START PAGE META -->--}}
             {{--<div id="page-meta">--}}
