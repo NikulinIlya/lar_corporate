@@ -99,7 +99,7 @@
 
                 <!-- START LOGO -->
                 <div id="logo" class="group">
-                    <a href="index.html" title="Pink Rio"><img src="{{ asset(env('THEME')) }}/images/logo.png" title="Pink Rio" alt="Pink Rio" /></a>
+                    <a href="/" title="Pink Rio"><img src="{{ asset(env('THEME')) }}/images/logo.png" title="Pink Rio" alt="Pink Rio" /></a>
                 </div>
                 <!-- END LOGO -->
 
@@ -126,29 +126,19 @@
         <!-- START SLIDER -->
         @yield('slider')
         <div class="wrap_result"></div>
-    {{--@if(Route::currentRouteName() == 'portfolios.index')--}}
-        {{--<!-- START PAGE META -->--}}
-            {{--<div id="page-meta">--}}
-                {{--<div class="inner group">--}}
-                    {{--<h3>Welcome to my portfolio page</h3>--}}
-                    {{--<h4>... i hope you enjoy my works</h4>--}}
-                {{--</div>--}}
-            {{--</div>--}}
-            {{--<!-- END PAGE META -->--}}
-    {{--@endif--}}
 
-    {{--@if(Route::currentRouteName() == 'contacts')--}}
-        {{--<!-- START PAGE META -->--}}
-            {{--<div id="page-meta">--}}
-                {{--<div class="inner group">--}}
-                    {{--<h3>...Say Hello! :)</h3>--}}
-                    {{--<h4>Get in touch with Pink Rio team</h4>--}}
-                {{--</div>--}}
-            {{--</div>--}}
-            {{--<!-- END PAGE META -->--}}
-    {{--@endif--}}
+        @if((Route::currentRouteName() == 'portfolios.index'))
+        <!-- START PAGE META -->
+        <div id="page-meta">
+            <div class="inner group">
+                <h3>Welcome to my portfolio page</h3>
+                <h4>... i hope you enjoy my works</h4>
+            </div>
+        </div>
+        @endif
+        <!-- END PAGE META -->
 
-    <!-- START PRIMARY -->
+        <!-- START PRIMARY -->
         <div id="primary" class="sidebar-{{ isset($bar) ? $bar : 'no' }}">
             <div class="inner group">
                 <!-- START CONTENT -->
