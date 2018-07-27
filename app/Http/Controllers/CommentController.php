@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use Validator;
 use Auth;
-use Response;
+use Illuminate\Http\Response;
 use Corp\Comment;
 use Corp\Article;
 
@@ -55,7 +55,7 @@ class CommentController extends SiteController
         });
 
         if($validator->fails()) {
-            return Response::json(['error' => $validator->errors()->all()]);
+            return response()->json(['error' => $validator->errors()->all()]);
         }
 
         $user = Auth::user();
@@ -67,9 +67,16 @@ class CommentController extends SiteController
 
         $post = Article::find($data['article_id']);
         $post->comments()->save($comment);
+        $comment->load('user');
+        $data['id'] = $comment->id;
+        $data['email'] = (!empty($data['email'])) ? $data['email'] : $comment->user->email;
+        $data['name'] = (!empty($data['name'])) ? $data['name'] : $comment->user->name;
 
-        echo json_encode(['hello' => 'world']);
-        exit();
+        $data['hash'] = md5($data['email']);
+        $view_comment = view(env('THEME').'.content_one_comment')->with('data', $data)->render();
+
+        return response()->json(['success' => TRUE, 'comment' => $view_comment, 'data' => $data]);
+//        exit();
     }
 
     /**
