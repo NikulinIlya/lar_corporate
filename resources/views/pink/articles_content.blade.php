@@ -46,7 +46,7 @@
             @endfor
 
             @if($articles->currentPage() !== $articles->lastPage())
-                <a href="{{ $articles->url($articles->currentPage() + 1) }}">{!! Lang::get('pagination.next') !!}  </a>
+                <a href="{{ $articles->url($articles->currentPage() + 1) }}">{!! Lang::get('pagination.next') !!}</a>
             @endif
         @endif
     </div>
