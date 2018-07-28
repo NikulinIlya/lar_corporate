@@ -138,6 +138,17 @@
         @endif
         <!-- END PAGE META -->
 
+        @if((Route::currentRouteName() == 'contacts'))
+            <!-- START PAGE META -->
+                <div id="page-meta">
+                    <div class="inner group">
+                        <h3>...Say Hello! :)</h3>
+                        <h4>Get in touch with Pink Rio team</h4>
+                    </div>
+                </div>
+        @endif
+        <!-- END PAGE META -->
+
         <!-- START PRIMARY -->
         <div id="primary" class="sidebar-{{ isset($bar) ? $bar : 'no' }}">
             <div class="inner group">
