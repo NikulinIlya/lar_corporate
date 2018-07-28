@@ -5,6 +5,11 @@ namespace Corp\Exceptions;
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
+use Corp\Http\Controllers\SiteController;
+use Corp\Menu;
+use Corp\Repositories\MenusRepository;
+use Log;
+
 class Handler extends ExceptionHandler
 {
     /**
@@ -29,8 +34,9 @@ class Handler extends ExceptionHandler
     /**
      * Report or log an exception.
      *
-     * @param  \Exception  $exception
+     * @param  \Exception $exception
      * @return void
+     * @throws Exception
      */
     public function report(Exception $exception)
     {
@@ -40,12 +46,24 @@ class Handler extends ExceptionHandler
     /**
      * Render an exception into an HTTP response.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Exception  $exception
+     * @param  \Illuminate\Http\Request $request
+     * @param  \Exception $exception
      * @return \Illuminate\Http\Response
+     * @throws \Throwable
      */
     public function render($request, Exception $exception)
     {
+        if($this->isHttpException($exception)) {
+            $statusCode = $exception->getStatusCode();
+            switch ($statusCode) {
+                case '404' :
+                    $obj = new SiteController(new MenusRepository(new Menu()));
+                    $navigation = view(env('THEME') .'.navigation')->with('menu',$obj->getMenu())->render();
+                    Log::alert('Страница не найдена! - ' . $request->url());
+                    return response()->view(env('THEME').'.404',['bar' => 'no','title'=>'Страница не найдена','navigation'=>$navigation]);
+                    break;
+            }
+        }
         return parent::render($request, $exception);
     }
 }
