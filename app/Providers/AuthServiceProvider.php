@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 use Corp\User;
+use Corp\Article;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -26,10 +27,14 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot(GateContract $gate)
     {
-        $this->registerPolicies();
+        $this->registerPolicies($gate);
 
         $gate->define('VIEW_ADMIN', function ($user) {
-            return $user->canDo(['VIEW_ADMIN', 'ADD_ARTICLES'], TRUE);
+            return $user->canDo('VIEW_ADMIN', FALSE);
+        });
+
+        $gate->define('VIEW_ADMIN_ARTICLES', function ($user) {
+            return $user->canDo('VIEW_ADMIN_ARTICLES', FALSE);
         });
     }
 }
