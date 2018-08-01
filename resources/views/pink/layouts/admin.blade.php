@@ -85,6 +85,13 @@
             </div>
         @endif
 
+        {{--если выше не работает:--}}
+        {{--@if(session()->exists('error')) --}}
+            {{--<div class="box error-box"> --}}
+                {{--{{ session()->get('error') }} --}}
+            {{--</div> --}}
+        {{--@endif﻿--}}
+
         @if (session('status'))
             <div class="box success-box">
                 {{ session('status') }}
