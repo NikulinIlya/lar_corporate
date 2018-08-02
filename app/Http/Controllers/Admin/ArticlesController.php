@@ -109,6 +109,7 @@ class ArticlesController extends AdminController
      *
      * @param Article $article
      * @return void
+     * @throws \Throwable
      */
     public function edit(Article $article)
     {
@@ -143,9 +144,14 @@ class ArticlesController extends AdminController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ArticleRequest $request, Article $article)
     {
-        //
+        $result = $this->a_rep->updateArticle($request, $article);
+        if(is_array($result) && !empty(['error'])) {
+            return back()->with($result);
+        }
+
+        return redirect('/admin')->with($result);
     }
 
     /**
