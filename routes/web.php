@@ -51,11 +51,16 @@ Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm
 //    Route::resource('/articles', 'Admin\ArticlesController');
 //});
 
-Route::group(['middleware' => ['web','auth']], function () {
+Route::group(['prefix' => 'admin', 'middleware' => ['web','auth']], function () {
 
-    Route::get('admin/articles/{articles}/edit', 'Admin\ArticlesController@edit')->name('admin.articles.edit');
-    Route::get('admin.articles.create', 'Admin\ArticlesController@create')->name('admin.articles.create');
-    Route::get('admin.articles.destroy', 'Admin\ArticlesController@destroy')->name('admin.articles.destroy');
-    Route::post('admin.article.store', 'Admin\ArticlesController@store')->name('admin.article.store');
+    Route::get('/', ['uses' => 'Admin\IndexController@index', 'as' => 'adminIndex']);
+
     Route::resource('/articles', 'Admin\ArticlesController');
+
+    Route::get('/articles/{articles}/edit', 'Admin\ArticlesController@edit')->name('admin.articles.edit');
+    Route::get('/articles/create', 'Admin\ArticlesController@create')->name('admin.articles.create');
+    Route::get('/articles/destroy', 'Admin\ArticlesController@destroy')->name('admin.articles.destroy');
+    Route::post('/article/store', 'Admin\ArticlesController@store')->name('admin.article.store');
+
+    Route::resource('/permissions', 'Admin\PermissionsController');
 });
