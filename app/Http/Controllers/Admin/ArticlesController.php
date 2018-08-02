@@ -140,8 +140,8 @@ class ArticlesController extends AdminController
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param ArticleRequest $request
+     * @param Article $article
      * @return \Illuminate\Http\Response
      */
     public function update(ArticleRequest $request, Article $article)
@@ -160,8 +160,13 @@ class ArticlesController extends AdminController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Article $article)
     {
-        //
+        $result = $this->a_rep->deleteArticle($article);
+        if(is_array($result) && !empty(['error'])) {
+            return back()->with($result);
+        }
+
+        return redirect('/admin')->with($result);
     }
 }
