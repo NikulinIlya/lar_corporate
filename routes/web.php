@@ -63,4 +63,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web','auth']], function () 
     Route::post('/article/store', 'Admin\ArticlesController@store')->name('admin.article.store');
 
     Route::resource('/permissions', 'Admin\PermissionsController');
+
+    Route::resource('/menus', 'Admin\MenusController');
 });
