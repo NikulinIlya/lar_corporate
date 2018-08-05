@@ -208,23 +208,31 @@ class MenusController extends AdminController
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param \Corp\Menu $menu
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, \Corp\Menu $menu)
     {
-        //
+        $result = $this->m_rep->updateMenu($request, $menu);
+        if(is_array($result) && !empty($result['error'])) {
+            return back()->with($result);
+        }
+        return redirect('/admin')->with($result);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param \Corp\Menu $menu
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(\Corp\Menu $menu)
     {
-        //
+        $result = $this->m_rep->deleteMenu($menu);
+        if(is_array($result) && !empty($result['error'])) {
+            return back()->with($result);
+        }
+        return redirect('/admin')->with($result);
     }
 }
