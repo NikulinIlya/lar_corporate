@@ -13,7 +13,6 @@
                 </div>
             </li>
 
-
             <li class="text-field">
                 <label for="name-contact-us">
                     <span class="label">Родительский пункт меню:</span>
@@ -23,19 +22,15 @@
                 <div class="input-prepend">
                     {!! Form::select('parent', $menus, isset($menu->parent) ? $menu->parent : null) !!}
                 </div>
-
             </li>
         </ul>
 
         <h1>Тип меню:</h1>
 
         <div id="accordion">
-
             <h3>{!! Form::radio('type', 'customLink',(isset($type) && $type == 'customLink') ? TRUE : FALSE,['class' => 'radioMenu']) !!}
                 <span class="label">Пользовательская ссылка:</span></h3>
-
             <ul>
-
                 <li class="text-field">
                     <label for="name-contact-us">
                         <span class="label">Путь для ссылки:</span>
@@ -49,12 +44,10 @@
                 <div style="clear: both;"></div>
             </ul>
 
-
             <h3>{!! Form::radio('type', 'blogLink',(isset($type) && $type == 'blogLink') ? TRUE : FALSE,['class' => 'radioMenu']) !!}
                 <span class="label">Раздел Блог:</span></h3>
 
             <ul>
-
                 <li class="text-field">
                     <label for="name-contact-us">
                         <span class="label">Ссылка на категорию блога:</span>
@@ -62,13 +55,11 @@
                         <span class="sublabel">Ссылка на категорию блога</span><br />
                     </label>
                     <div class="input-prepend">
-
                         @if($categories)
                             {!! Form::select('category_alias',$categories,(isset($option) && $option) ? $option :FALSE) !!}
                         @endif
                     </div>
                 </li>
-
 
                 <li class="text-field">
                     <label for="name-contact-us">
@@ -78,20 +69,14 @@
                     </label>
                     <div class="input-prepend">
                         {!! Form::select('article_alias', $articles, (isset($option) && $option) ? $option :FALSE, ['placeholder' => 'Не используется']) !!}
-
                     </div>
-
                 </li>
                 <div style="clear: both;"></div>
             </ul>
 
-
-
             <h3>{!! Form::radio('type', 'portfolioLink',(isset($type) && $type == 'portfolioLink') ? TRUE : FALSE,['class' => 'radioMenu']) !!}
                 <span class="label">Раздел портфолио:</span></h3>
-
             <ul>
-
                 <li class="text-field">
                     <label for="name-contact-us">
                         <span class="label">Ссылка на запись портфолио:</span>
@@ -100,9 +85,7 @@
                     </label>
                     <div class="input-prepend">
                         {!! Form::select('portfolio_alias', $portfolios, (isset($option) && $option) ? $option :FALSE, ['placeholder' => 'Не используется']) !!}
-
                     </div>
-
                 </li>
 
                 <li class="text-field">
@@ -113,23 +96,13 @@
                     </label>
                     <div class="input-prepend">
                         {!! Form::select('filter_alias', $filters, (isset($option) && $option) ? $option :FALSE, ['placeholder' => 'Не используется']) !!}
-
                     </div>
-
                 </li>
-
-
             </ul>
-
-
-
         </div>
-
         <br />
-
         @if(isset($menu->id))
             <input type="hidden" name="_method" value="PUT">
-
         @endif
         <ul>
             <li class="submit-button">
@@ -137,41 +110,25 @@
             </li>
         </ul>
 
-
-
-
-
-
-
         {!! Form::close() !!}
-
 
     </div>
 </div>
 
 <script>
-
     jQuery(function($) {
-
         $('#accordion').accordion({
-
             activate: function(e, obj) {
                 obj.newPanel.prev().find('input[type=radio]').attr('checked','checked');
             }
-
         });
 
         var active = 0;
         $('#accordion input[type=radio]').each(function(ind,it) {
-
             if($(this).prop('checked')) {
                 active = ind;
             }
-
         });
-
         $('#accordion').accordion('option','active', active);
-
     })
-
 </script>
