@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Corp\Http\Controllers\Controller;
 use Auth;
 use Menu;
+use Gate;
 
 class AdminController extends Controller
 {
@@ -32,7 +33,7 @@ class AdminController extends Controller
         $this->vars = array_add($this->vars, 'title', $this->title);
         $menu = $this->getMenu();
 
-        $navigation = view(env('THEME').'.admin.navigation')->with('menu', $menu)->render();
+        $navigation = view(config('settings.theme').'.admin.navigation')->with('menu', $menu)->render();
         $this->vars = array_add($this->vars, 'navigation', $navigation);
 
         if($this->content) {
@@ -48,7 +49,10 @@ class AdminController extends Controller
     public function getMenu() {
 
         return Menu::make('adminMenu', function ($menu) {
-            $menu->add('Статьи', array('route' => 'admin.articles.index'));
+            if(Gate::allows('VIEW_ADMIN_ARTICLES')) {
+                $menu->add('Статьи', array('route' => 'admin.articles.index'));
+            }
+
 
             $menu->add('Портфолио', array('route'=>'admin.articles.index'));
             $menu->add('Меню', array('route'=>'admin.menus.index'));
